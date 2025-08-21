@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Filament\Resources\KelolaBeritaResource\Pages;
+
+use App\Filament\Resources\KelolaBeritaResource;
+use Filament\Actions;
+use Filament\Resources\Pages\ListRecords;
+
+class ListKelolaBeritas extends ListRecords
+{
+    protected static string $resource = KelolaBeritaResource::class;
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Actions\CreateAction::make(),
+        ];
+    }
+}
