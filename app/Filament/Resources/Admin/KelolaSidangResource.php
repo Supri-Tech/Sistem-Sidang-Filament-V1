@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Resources\Admin;
 
-use App\Filament\Resources\KelolaSidangResource\Pages;
+use App\Filament\Resources\Admin\KelolaSidangResource\Pages;
 use App\Filament\Resources\KelolaSidangResource\RelationManagers;
 use App\Models\Hakim;
 use App\Models\Perkara;
@@ -40,6 +40,10 @@ class KelolaSidangResource extends Resource
     {
         return $form
             ->schema([
+                TextInput::make('nama')
+                    ->label('Nama Persidangan')
+                    ->columnSpanFull()
+                    ->required(),
                 Select::make('id_hakim_ketua')
                     ->label('Hakim Ketua')
                     ->options(Hakim::where('jabatan', 'hakim ketua')->pluck('nama', 'id'))
@@ -62,7 +66,7 @@ class KelolaSidangResource extends Resource
                     ->required(),
                 Select::make('id_perkara')
                     ->label('Perkara')
-                    ->options(Perkara::all()->pluck('jenis_perkara', 'id'))
+                    ->options(Perkara::all()->pluck('no_perkara', 'id'))
                     ->searchable()
                     ->required(),
                 TextInput::make('ruang_sidang')
@@ -92,6 +96,7 @@ class KelolaSidangResource extends Resource
                 TextColumn::make('perkara.no_perkara')->label('No Perkara'),
                 TextColumn::make('ruang_sidang'),
                 TextColumn::make('waktu_sidang'),
+                TextColumn::make('status')->badge(),
             ])
             ->filters([
                 //

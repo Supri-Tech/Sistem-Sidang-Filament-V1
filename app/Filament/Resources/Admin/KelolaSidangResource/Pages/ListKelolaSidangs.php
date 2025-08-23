@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\KelolaSidangResource\Pages;
+namespace App\Filament\Resources\Admin\KelolaSidangResource\Pages;
 
-use App\Filament\Resources\KelolaSidangResource;
+use App\Filament\Resources\Admin\KelolaSidangResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 

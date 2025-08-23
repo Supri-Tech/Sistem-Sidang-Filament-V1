@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Resources\Admin;
 
-use App\Filament\Resources\KelolaBeritaResource\Pages;
+use App\Filament\Resources\Admin\KelolaBeritaResource\Pages;
 use App\Filament\Resources\KelolaBeritaResource\RelationManagers;
 use App\Models\Berita;
 use Filament\Forms;
@@ -42,8 +42,8 @@ class KelolaBeritaResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('judul'),
-                TextColumn::make('created_at')->date()
+                TextColumn::make('judul')->searchable(),
+                TextColumn::make('created_at')->date()->sortable()
             ])
             ->filters([
                 //

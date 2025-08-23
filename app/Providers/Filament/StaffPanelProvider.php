@@ -19,14 +19,13 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin;
 
-class AdminPanelProvider extends PanelProvider
+class StaffPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->default()
-            ->id('admin')
-            ->path('admin')
+            ->id('staff')
+            ->path('staff')
             ->login()
             ->colors([
                 'primary' => Color::Amber,
@@ -34,12 +33,12 @@ class AdminPanelProvider extends PanelProvider
             ->plugin(
                 FilamentFullCalendarPlugin::make()->selectable()
             )
-            ->discoverResources(in: app_path('Filament/Resources/Admin'), for: 'App\\Filament\\Resources\\Admin')
-            ->discoverPages(in: app_path('Filament/Pages/Admin'), for: 'App\\Filament\\Pages\\Admin')
+            ->discoverResources(in: app_path('Filament/Staff/Resources/Staff'), for: 'App\\Filament\\Staff\\Resources\\Staff')
+            ->discoverPages(in: app_path('Filament/Staff/Pages/Staff'), for: 'App\\Filament\\Staff\\Pages\\Staff')
             ->pages([
-                \App\Filament\Pages\Admin\AdminDashboard::class,
+                \App\Filament\Pages\Staff\StaffDashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Widgets/Admin'), for: 'App\\Filament\\Widgets\\Admin')
+            ->discoverWidgets(in: app_path('Filament/Staff/Widgets/Staff'), for: 'App\\Filament\\Staff\\Widgets\\Staff')
             ->widgets([
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,

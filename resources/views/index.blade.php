@@ -53,17 +53,17 @@
         <h2 class="text-2xl font-bold text-center mb-10">Berita Terbaru</h2>
         <div class="grid md:grid-cols-3 gap-8">
             @forelse ($berita as $item)
-                <div class="bg-gray-100 p-6 rounded-lg shadow">
-                    <h3 class="font-semibold mb-2">{{ $item->judul }}</h3>
-                    <p class="text-sm text-gray-600">
-                        {{ Str::limit($item->isi_berita, 50, '...') }}
-                    </p>
-                    <a href="#" class="text-green-700 font-semibold text-sm mt-3 inline-block">Baca selengkapnya →</a>
-                </div>
-            @empty
-                <p class="text-xl font-bold text-center">
-                    Belum ada berita
+            <div class="bg-gray-100 p-6 rounded-lg shadow">
+                <h3 class="font-semibold mb-2">{{ $item->judul }}</h3>
+                <p class="text-sm text-gray-600">
+                    {{ Str::limit($item->isi_berita, 50, '...') }}
                 </p>
+                <a href="{{ route('berita.show', $item->id) }}" class="text-green-700 font-semibold text-sm mt-3 inline-block">Baca selengkapnya →</a>
+            </div>
+            @empty
+            <p class="text-xl font-bold text-center">
+                Belum ada berita
+            </p>
             @endforelse
         </div>
     </div>

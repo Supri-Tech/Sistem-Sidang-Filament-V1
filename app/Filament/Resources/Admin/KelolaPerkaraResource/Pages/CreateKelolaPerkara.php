@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\KelolaPerkaraResource\Pages;
+namespace App\Filament\Resources\Admin\KelolaPerkaraResource\Pages;
 
-use App\Filament\Resources\KelolaPerkaraResource;
+use App\Filament\Resources\Admin\KelolaPerkaraResource;
 use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 

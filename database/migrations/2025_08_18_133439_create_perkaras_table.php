@@ -15,8 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('no_perkara', 32);
             $table->string('jenis_perkara');
+            $table->string('email_terdakwa');
+            $table->string('wa_terdakwa');
             $table->string('terdakwa');
             $table->string('korban');
+            $table->string('email_korban');
+            $table->string('wa_korban');
             $table->enum('status', ['aktif', 'ditutup', 'banding', 'kasasi']);
             $table->timestamps();
         });
@@ -27,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('perkaras');
+        Schema::dropIfExists('perkara');
     }
 };

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources\KelolaHakimResource\Pages;
+namespace App\Filament\Resources\Admin\KelolaHakimResource\Pages;
 
-use App\Filament\Resources\KelolaHakimResource;
+use App\Filament\Resources\Admin\KelolaHakimResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 

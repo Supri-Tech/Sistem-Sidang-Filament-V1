@@ -22,8 +22,12 @@ class PerkaraFactory extends Factory
         return [
             'no_perkara' => strtoupper($this->faker->bothify('PRK-####/2025')),
             'jenis_perkara' => $this->faker->randomElement(['Pidana', 'Perdata', 'Tipikor', 'Tata Usaha Negara']),
+            'email_terdakwa' => fake()->unique()->safeEmail(),
+            'wa_terdakwa' => fake()->unique()->phoneNumber(),
             'terdakwa' => $this->faker->name(),
             'korban' => $this->faker->name(),
+            'email_korban' => fake()->unique()->safeEmail(),
+            'wa_korban' => fake()->unique()->phoneNumber(),
             'status' => $this->faker->randomElement(['aktif', 'ditutup', 'banding', 'kasasi'])
         ];
     }

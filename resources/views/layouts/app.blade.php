@@ -1,12 +1,14 @@
 <!doctype html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@yield('title', 'Concertly')</title>
+    <title>@yield('title', 'Kejaksaan Tinggi Negeri Tanjung Perak')</title>
     @vite('resources/css/app.css')
-  </head>
-  <body class="bg-gray-50 text-gray-800">
+</head>
+
+<body class="bg-gray-50 text-gray-800">
     <header class="bg-green-700 text-white shadow">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <!-- Logo -->
@@ -17,9 +19,9 @@
             <!-- Menu -->
             <nav class="space-x-4">
                 <a href="{{ route('home') }}"
-                   class="hover:text-gray-200 transition">Beranda</a>
+                    class="hover:text-gray-200 transition">Beranda</a>
                 <a href="{{ route('perkara.index') }}"
-                   class="hover:text-gray-200 transition">Cari Perkara</a>
+                    class="hover:text-gray-200 transition">Cari Perkara</a>
             </nav>
         </div>
     </header>
@@ -63,5 +65,6 @@
             &copy; {{ date('Y') }} Kejaksaan Negeri. All Rights Reserved.
         </div>
     </footer>
-  </body>
+</body>
+
 </html>

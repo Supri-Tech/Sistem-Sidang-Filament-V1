@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Resources\Admin;
 
-use App\Filament\Resources\KelolaPerkaraResource\Pages;
+use App\Filament\Resources\Admin\KelolaPerkaraResource\Pages;
 use App\Filament\Resources\KelolaPerkaraResource\RelationManagers;
 use App\Models\Perkara;
 use Filament\Forms;
@@ -40,6 +40,10 @@ class KelolaPerkaraResource extends Resource
                 TextInput::make('jenis_perkara')->label('Jenis Perkara')->required(),
                 TextInput::make('terdakwa')->required(),
                 TextInput::make('korban')->required(),
+                TextInput::make('email_terdakwa')->label('Email Terdakwa')->email()->required(),
+                TextInput::make('email_korban')->label('Email Korban')->email()->required(),
+                TextInput::make('wa_terdakwa')->label('No WA Terdakwa')->required(),
+                TextInput::make('wa_korban')->label('No WA Korban')->required(),
                 Select::make('status_perkara')->options([
                     'aktif' => 'Aktif',
                     'ditutup' => 'Ditutup',
@@ -56,11 +60,18 @@ class KelolaPerkaraResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('no_perkara'),
-                TextColumn::make('jenis_perkara'),
-                TextColumn::make('terdakwa'),
-                TextColumn::make('korban'),
-                TextColumn::make('status')->badge(),
+                TextColumn::make('no_perkara')->searchable(),
+                TextColumn::make('jenis_perkara')->searchable(),
+                TextColumn::make('terdakwa')->searchable(),
+                TextColumn::make('korban')->searchable(),
+                TextColumn::make('status')
+                    ->badge()
+                    ->color(fn ($state) => match ($state) {
+                        'aktif' => 'success',
+                        'kasasi' => 'secondary',
+                        'banding' => 'warning',
+                        'ditutup' => 'danger'
+                    }),
             ])
             ->filters([
                 //

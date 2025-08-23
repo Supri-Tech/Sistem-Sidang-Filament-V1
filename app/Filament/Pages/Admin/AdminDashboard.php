@@ -2,8 +2,8 @@
 
 namespace App\Filament\Pages\Admin;
 
-use App\Filament\Widgets\CalendarWidget;
-use App\Filament\Widgets\UpperStatAdmin;
+use App\Filament\Widgets\Admin\CalendarWidget;
+use App\Filament\Widgets\Admin\UpperStatAdmin;
 use Filament\Pages\Dashboard;
 
 class AdminDashboard extends Dashboard

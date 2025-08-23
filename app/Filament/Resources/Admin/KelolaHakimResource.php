@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Resources\Admin;
 
-use App\Filament\Resources\KelolaHakimResource\Pages;
+use App\Filament\Resources\Admin\KelolaHakimResource\Pages;
 use App\Filament\Resources\KelolaHakimResource\RelationManagers;
 use App\Models\Hakim;
 use Filament\Forms;

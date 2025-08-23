@@ -36,4 +36,9 @@ class Hakim extends Model
     {
         return $this->hasMany(Sidang::class, 'id_panitera');
     }
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id_hakim');
+    }
 }

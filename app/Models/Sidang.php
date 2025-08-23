@@ -12,6 +12,7 @@ class Sidang extends Model
     protected $table = "sidang";
 
     protected $fillable = [
+        'nama',
         'id_perkara',
         'id_hakim_ketua',
         'id_hakim_anggota_1',
