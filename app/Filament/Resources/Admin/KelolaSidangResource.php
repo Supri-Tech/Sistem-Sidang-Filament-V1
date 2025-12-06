@@ -26,6 +26,11 @@ class KelolaSidangResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-inbox-stack';
 
+    public static function canAccess(): bool
+    {
+        return auth()->check() && auth()->user()->hasRole('admin');
+    }
+
     public static function getPluralLabel(): string
     {
         return 'Sidang';

@@ -28,6 +28,11 @@ class PutusanResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    public static function canAccess(): bool
+    {
+        return auth()->check() && auth()->user()->hasRole('admin');
+    }
+
     public static function getPluralLabel(): string
     {
         return 'Putusan';

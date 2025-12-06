@@ -2,14 +2,17 @@
 
 namespace App\Providers\Filament;
 
+use Filament\Facades\Filament;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\MenuItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use App\Filament\Pages\Staff\Profile as StaffProfile;
 use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -56,6 +59,12 @@ class StaffPanelProvider extends PanelProvider
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
             ])
+            ->userMenuItems([
+                'profile' => MenuItem::make()
+                    ->label(fn () => auth()->user()?->name ?? 'Profile')
+                    ->url(fn (): string => StaffProfile::getUrl())
+                    // ->icon('heroicon-o-user')
+            ])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
@@ -69,6 +78,7 @@ class StaffPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->authGuard('staff');
     }
 }

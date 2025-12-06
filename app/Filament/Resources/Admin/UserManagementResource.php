@@ -22,6 +22,11 @@ class UserManagementResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
+    public static function canAccess(): bool
+    {
+        return auth()->check() && auth()->user()->hasRole('admin');
+    }
+
     public static function getNavigationLabel(): string
     {
         return 'Kelola User';

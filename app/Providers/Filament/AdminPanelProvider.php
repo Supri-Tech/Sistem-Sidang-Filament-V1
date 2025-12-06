@@ -2,14 +2,18 @@
 
 namespace App\Providers\Filament;
 
+use Filament\Facades\Filament;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\MenuItem;
+use Filament\Navigation\UserMenuItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use App\Filament\Pages\Admin\Profile as AdminProfile;
 use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -57,6 +61,12 @@ class AdminPanelProvider extends PanelProvider
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
             ])
+            ->userMenuItems([
+                'profile' => MenuItem::make()
+                    ->label(fn () => auth()->user()?->name ?? 'Profile')
+                    ->url(fn (): string => AdminProfile::getUrl()) // lazy, resolved later
+                    ->icon('heroicon-o-user')
+            ])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
@@ -70,6 +80,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->authGuard('admin');
     }
 }

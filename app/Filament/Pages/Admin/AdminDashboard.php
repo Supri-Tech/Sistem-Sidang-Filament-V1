@@ -11,7 +11,7 @@ class AdminDashboard extends Dashboard
     protected static ?string $navigationIcon = 'heroicon-o-home';
     protected static string $view = 'filament.pages.admin-dashboard';
 
-    public static function canAccess(): bool
+    public static function canView(): bool
     {
         return auth()->user()?->hasRole('admin');
     }
