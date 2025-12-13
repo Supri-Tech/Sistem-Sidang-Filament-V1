@@ -13,7 +13,7 @@
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <!-- Logo -->
             <a href="{{ route('home') }}" class="text-lg font-bold tracking-wide">
-                Kejaksaan Negeri
+                <img src="<?= asset('logo.png') ?>" class="w-50" />
             </a>
 
             <!-- Menu -->
@@ -44,9 +44,9 @@
             <div>
                 <h3 class="text-lg font-semibold mb-3">Kontak</h3>
                 <ul class="space-y-2 text-sm">
-                    <li>📍 Jl. Contoh No. 123, Jakarta</li>
-                    <li>📞 (021) 123-4567</li>
-                    <li>✉️ info@kejaksaan.go.id</li>
+                    <li>📍 Jl. Kemayoran Baru No.1, Krembangan Sel., Kec. Krembangan, Surabaya, Jawa Timur 60175</li>
+                    <li>📞 (031) 3521019</li>
+                    <li>✉️ kejariperak@gmail.com</li>
                 </ul>
             </div>
 

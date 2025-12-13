@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('agenda_sidangs');
+        Schema::dropIfExists('agenda_sidang');
     }
 };

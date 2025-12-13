@@ -6,6 +6,8 @@ use App\Filament\Resources\Admin\KelolaBeritaResource\Pages;
 use App\Filament\Resources\KelolaBeritaResource\RelationManagers;
 use App\Models\Berita;
 use Filament\Forms;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -39,7 +41,8 @@ class KelolaBeritaResource extends Resource
     {
         return $form
             ->schema([
-                //
+                TextInput::make("judul")->columnSpanFull()->required(),
+                Textarea::make("isi_berita")->columnSpanFull()->required()
             ]);
     }
 

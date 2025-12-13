@@ -13,7 +13,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $admin = User::factory()->admin()->create([
+        $admin = User::factory()->staff()->create([
             'name' => 'admin',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('password')
