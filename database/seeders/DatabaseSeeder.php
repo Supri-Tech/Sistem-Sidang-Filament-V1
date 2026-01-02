@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             // BeritaSeeder::class,
             HakimSeeder::class,
+            JaksaSeeder::class,
             // PerkaraSeeder::class,
             UserSeeder::class
         ]);

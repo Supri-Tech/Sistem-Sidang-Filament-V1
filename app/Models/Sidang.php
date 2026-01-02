@@ -18,6 +18,7 @@ class Sidang extends Model
         'id_hakim_anggota_1',
         'id_hakim_anggota_2',
         'id_panitera',
+        'id_jaksa',
         'ruang_sidang',
         'waktu_sidang',
         'status',
@@ -35,6 +36,11 @@ class Sidang extends Model
     public function hakim()
     {
         return $this->belongsTo(Hakim::class, 'id_hakim_ketua');
+    }
+
+    public function jaksa()
+    {
+        return $this->belongsTo(Jaksa::class, 'id_jaksa');
     }
 
     public function hakimAnggota1()

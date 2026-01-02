@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Hakim;
+use App\Models\Jaksa;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -25,7 +26,7 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'id_hakim' => null,
+            'id_jaksa' => null,
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
@@ -37,14 +38,14 @@ class UserFactory extends Factory
     public function staff(): static
     {
         return $this->state(fn () => [
-            'id_hakim' => Hakim::inRandomOrder()->first()?->id ?? Hakim::factory()
+            'id_jaksa' => Jaksa::inRandomOrder()->first()?->id ?? Jaksa::factory()
         ]);
     }
 
     public function admin(): static
     {
         return $this->state(fn () => [
-            'id_hakim' => null
+            'id_jaksa' => null
         ]);
     }
 

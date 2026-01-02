@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'id_hakim',
+        'id_jaksa',
         'name',
         'email',
         'password',
@@ -45,8 +45,8 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function hakim()
+    public function jaksa()
     {
-        return $this->belongsTo(Hakim::class, 'id_hakim');
+        return $this->belongsTo(Jaksa::class, 'id_jaksa');
     }
 }

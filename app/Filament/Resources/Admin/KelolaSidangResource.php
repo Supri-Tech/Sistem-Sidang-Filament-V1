@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Admin;
 use App\Filament\Resources\Admin\KelolaSidangResource\Pages;
 use App\Filament\Resources\KelolaSidangResource\RelationManagers;
 use App\Models\Hakim;
+use App\Models\Jaksa;
 use App\Models\Perkara;
 use App\Models\Sidang;
 use Filament\Forms;
@@ -48,6 +49,12 @@ class KelolaSidangResource extends Resource
                 TextInput::make('nama')
                     ->label('Nama Persidangan')
                     ->columnSpanFull()
+                    ->required(),
+                Select::make('id_jaksa')
+                    ->label('Jaksa')
+                    ->options(Jaksa::pluck('nama', 'id'))
+                    ->columnSpanFull()
+                    ->searchable()
                     ->required(),
                 Select::make('id_hakim_ketua')
                     ->label('Hakim Ketua')
