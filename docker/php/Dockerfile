@@ -23,10 +23,13 @@ RUN apt-get update && apt-get install -y \
         bcmath \
         gd \
         zip \
-        intl
+        intl \
+        opcache
 
+# Install Node.js 22.x
 RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
-    && apt-get install -y nodejs
+    && apt-get install -y nodejs \
+    && npm install -g npm@latest
 
 # Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
@@ -34,19 +37,37 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 # Set working directory
 WORKDIR /var/www
 
-# Copy project files
+# Copy package files first for better caching
+COPY package*.json ./
+COPY vite.config.js ./
+
+# Install Node dependencies (including dev dependencies for build)
+RUN npm ci --include=dev
+
+# Copy rest of the application
 COPY . .
 
 # Install PHP dependencies
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
-# Install Node dependencies & build assets
-RUN npm install && npm run build
+# Build assets
+RUN npm run build
+
+# Clean up dev dependencies for production (optional)
+RUN npm prune --production
 
 # Permissions
-RUN chown -R www-data:www-data \
-    /var/www/storage \
-    /var/www/bootstrap/cache
+RUN chown -R www-data:www-data /var/www \
+    && chmod -R 755 /var/www/storage \
+    && chmod -R 755 /var/www/bootstrap/cache
+
+# Copy PHP-FPM configuration
+COPY docker/php/www.conf /usr/local/etc/php-fpm.d/www.conf
 
 EXPOSE 9000
-CMD ["php-fpm"]
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD php-fpm -t || exit 1
+
+CMD ["php-fpm", "-F"]

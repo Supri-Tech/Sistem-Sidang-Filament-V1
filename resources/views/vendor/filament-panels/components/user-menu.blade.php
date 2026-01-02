@@ -42,6 +42,7 @@
         <x-filament::dropdown.list>
             {{-- Profile --}}
             <x-filament::dropdown.list.item
+                tag="a"
                 :href="\App\Filament\Pages\Admin\Profile::getUrl()"
                 icon="heroicon-o-user"
             >
@@ -49,22 +50,24 @@
             </x-filament::dropdown.list.item>
 
             {{-- Light / Dark Toggle --}}
-            <x-filament::dropdown.list.item
-                x-on:click="$store.theme.toggle()"
+            {{-- <x-filament::dropdown.list.item
+                x-on:click="window.Filament?.toggleTheme()"
                 icon="heroicon-o-moon"
             >
                 Theme
-            </x-filament::dropdown.list.item>
+            </x-filament::dropdown.list.item> --}}
 
             {{-- Logout --}}
-            <x-filament::dropdown.list.item
-                icon="heroicon-o-arrow-left-on-rectangle"
-                :href="filament()->getLogoutUrl()"
-                tag="a"
-                method="post"
-            >
-                Sign out
-            </x-filament::dropdown.list.item>
+            <form method="POST" action="{{ filament()->getLogoutUrl() }}">
+                @csrf
+                <x-filament::dropdown.list.item
+                    tag="button"
+                    type="submit"
+                    icon="heroicon-o-arrow-left-on-rectangle"
+                >
+                    Sign out
+                </x-filament::dropdown.list.item>
+            </form>
         </x-filament::dropdown.list>
     </x-filament::dropdown>
 </div>

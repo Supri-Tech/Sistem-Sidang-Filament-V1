@@ -13,6 +13,6 @@ class HakimSeeder extends Seeder
      */
     public function run(): void
     {
-        Hakim::factory()->count(50)->create();
+        Hakim::factory()->count(1)->create();
     }
 }

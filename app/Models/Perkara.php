@@ -20,7 +20,7 @@ class Perkara extends Model
         'korban',
         'email_korban',
         'wa_korban',
-        'status_perkara',
+        'status',
     ];
 
     public function sidang()

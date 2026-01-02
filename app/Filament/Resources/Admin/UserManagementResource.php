@@ -36,6 +36,12 @@ class UserManagementResource extends Resource
     {
         return $form
             ->schema([
+                Select::make('id_hakim')
+                    ->relationship('hakim', 'nama')
+                    ->preload()
+                    ->searchable()
+                    ->columnSpanFull()
+                    ->required(),
                 TextInput::make('name')->required(),
                 TextInput::make('email')->email()->required(),
                 TextInput::make('password')

@@ -20,9 +20,9 @@ class UserSeeder extends Seeder
         ]);
         $admin->assignRole('admin');
 
-        $staffs = User::factory()->count(10)->staff()->create();
-        foreach($staffs as $staff){
-            $staff->assignRole('staff');
-        }
+        // $staffs = User::factory()->count(10)->staff()->create();
+        // foreach($staffs as $staff){
+        //     $staff->assignRole('staff');
+        // }
     }
 }
