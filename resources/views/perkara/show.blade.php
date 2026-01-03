@@ -93,6 +93,7 @@
                                 <th class="px-4 py-2 text-left font-semibold text-gray-700">Waktu Sidang</th>
                                 <th class="px-4 py-2 text-left font-semibold text-gray-700">Status</th>
                                 <th class="px-4 py-2 text-left font-semibold text-gray-700">Hakim Ketua</th>
+                                <th class="px-4 py-2 text-left font-semibold text-gray-700">Jaksa</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -119,6 +120,9 @@
                                 <td class="px-4 py-3">
                                     {{ $sidang->hakim->nama ?? 'N/A' }}
                                 </td>
+                                <td class="px-4 py-3">
+                                    {{ $sidang->jaksa->nama ?? 'N/A' }}
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -141,6 +145,11 @@
                                 <p><span class="font-medium">Anggota 1:</span> {{ $sidang->hakimAnggota1->nama ?? 'N/A' }}</p>
                                 <p><span class="font-medium">Anggota 2:</span> {{ $sidang->hakimAnggota2->nama ?? 'N/A' }}</p>
                                 <p><span class="font-medium">Panitera:</span> {{ $sidang->hakimPanitera->nama ?? 'N/A' }}</p>
+
+                                <p class="pt-2 border-t">
+                                    <span class="font-medium">Jaksa Penuntut Umum:</span>
+                                    {{ $sidang->jaksa->nama ?? 'N/A' }}
+                                </p>
                             </div>
                         </div>
 

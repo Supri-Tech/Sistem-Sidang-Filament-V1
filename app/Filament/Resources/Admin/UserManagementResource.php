@@ -36,8 +36,8 @@ class UserManagementResource extends Resource
     {
         return $form
             ->schema([
-                Select::make('id_hakim')
-                    ->relationship('hakim', 'nama')
+                Select::make('id_jaksa')
+                    ->relationship('jaksa', 'nama')
                     ->preload()
                     ->searchable()
                     ->columnSpanFull()
