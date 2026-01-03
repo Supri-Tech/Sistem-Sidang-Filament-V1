@@ -12,6 +12,7 @@ class Profile extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
     protected static string $view = 'filament.pages.staff.profile';
+    protected static ?string $title = 'Profil';
     public static function shouldRegisterNavigation(): bool
     {
         return false;
@@ -27,47 +28,43 @@ class Profile extends Page
                     ->schema([
                         Info\Grid::make(2)->schema([
                             Info\TextEntry::make('name')
-                                ->label('Name')
+                                ->label('Nama')
                                 ->icon('heroicon-o-user'),
                             Info\TextEntry::make('email')
                                 ->label('Email')
                                 ->icon('heroicon-o-envelope'),
-                            Info\TextEntry::make('id_hakim')
-                                ->label('Hakim ID')
-                                ->badge()
-                                ->color(fn ($state) => $state ? 'success' : 'gray'),
+                            // Info\TextEntry::make('id_jaksa')
+                            //     ->label('ID Jaksa')
+                            //     ->badge()
+                            //     ->color(fn ($state) => $state ? 'success' : 'gray'),
                             Info\TextEntry::make('created_at')
-                                ->label('Joined')
+                                ->label('Bergabung pada')
                                 ->dateTime(),
-                            Info\TextEntry::make('email_verified_at')
-                                ->label('Email Verified')
-                                ->dateTime()
-                                ->badge()
-                                ->color(fn (?string $state): string => $state ? 'success' : 'danger'),
+                            // Info\TextEntry::make('email_verified_at')
+                            //     ->label('Email Verified')
+                            //     ->dateTime()
+                            //     ->badge()
+                            //     ->color(fn (?string $state): string => $state ? 'success' : 'danger'),
                         ]),
                     ]),
 
-                Info\Section::make('Hakim Details')
+                Info\Section::make('Informasi Jaksa')
                     ->icon('heroicon-o-briefcase')
-                    ->visible(fn (User $record) => $record->hakim !== null)
+                    ->visible(fn (User $record) => $record->jaksa !== null)
                     ->schema([
                         Info\Grid::make(2)->schema([
-                            Info\TextEntry::make('hakim.nama')
-                                ->label('Full Name'),
-                            Info\TextEntry::make('hakim.nip')
-                                ->label('NIP'),
-                            Info\TextEntry::make('hakim.pangkat_golongan')
-                                ->label('Rank / Grade'),
-                            Info\TextEntry::make('hakim.jabatan')
-                                ->label('Position'),
-                            Info\TextEntry::make('hakim.tempat_lahir')
-                                ->label('Place of Birth'),
-                            Info\TextEntry::make('hakim.tanggal_lahir')
-                                ->label('Date of Birth')
-                                ->date('d F Y'),
-                            Info\TextEntry::make('hakim.alamat')
-                                ->label('Address')
-                                ->columnSpanFull(),
+                            Info\TextEntry::make('jaksa.nama')
+                                ->label('Nama Jaksa'),
+
+                            Info\TextEntry::make('jaksa.NIP')
+                                ->label('NIP')
+                                ->badge()
+                                ->color('primary'),
+
+                            Info\TextEntry::make('jaksa.jabatan')
+                                ->label('Jabatan')
+                                ->badge()
+                                ->color('info'),
                         ]),
                     ]),
             ]);

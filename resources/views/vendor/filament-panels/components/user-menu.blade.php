@@ -32,7 +32,7 @@
                         {{ $user?->name }}
                     </p>
                     <p class="text-xs text-gray-500 dark:text-gray-400">
-                        {{ $user?->email }}
+                        {{ $user?->jaksa?->NIP ?? $user?->email }}
                     </p>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                 :href="\App\Filament\Pages\Admin\Profile::getUrl()"
                 icon="heroicon-o-user"
             >
-                Profile
+                Profil
             </x-filament::dropdown.list.item>
 
             {{-- Light / Dark Toggle --}}
@@ -65,7 +65,7 @@
                     type="submit"
                     icon="heroicon-o-arrow-left-on-rectangle"
                 >
-                    Sign out
+                    Keluar
                 </x-filament::dropdown.list.item>
             </form>
         </x-filament::dropdown.list>
