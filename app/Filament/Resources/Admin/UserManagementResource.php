@@ -40,7 +40,7 @@ class UserManagementResource extends Resource
                     ->relationship('jaksa', 'nama')
                     ->preload()
                     ->searchable()
-                    ->columnSpanFull()
+                    ->columnSpanFull(),
                 TextInput::make('name')->required(),
                 TextInput::make('email')->email()->required(),
                 TextInput::make('password')

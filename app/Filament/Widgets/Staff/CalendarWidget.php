@@ -20,17 +20,21 @@ class CalendarWidget extends FullCalendarWidget
     public function fetchEvents(array $fetchInfo): array
     {
         $query = Sidang::query()
-            ->with(['perkara', 'hakim', 'hakimAnggota1', 'hakimAnggota2', 'hakimPanitera'])
+            ->with(['perkara', 'hakim', 'hakimAnggota1', 'hakimAnggota2', 'hakimPanitera', 'jaksa'])
             ->whereBetween('waktu_sidang', [$fetchInfo['start'], $fetchInfo['end']]);
 
         $user = Auth::user();
-        if($user && $user->id_hakim){
-            $query->where(function ($q) use ($user){
-                $q->where('id_hakim_ketua', $user->id_hakim)
-                  ->orWhere('id_hakim_anggota_1', $user->id_hakim)
-                  ->orWhere('id_hakim_anggota_2', $user->id_hakim)
-                  ->orWhere('id_panitera', $user->id_hakim);
-            });
+        // if($user && $user->id_hakim){
+        //     $query->where(function ($q) use ($user){
+        //         $q->where('id_hakim_ketua', $user->id_hakim)
+        //           ->orWhere('id_hakim_anggota_1', $user->id_hakim)
+        //           ->orWhere('id_hakim_anggota_2', $user->id_hakim)
+        //           ->orWhere('id_panitera', $user->id_hakim);
+        //     });
+        // }
+
+        if ($user && $user->id_jaksa) {
+            $query->where('id_jaksa', $user->id_jaksa);
         }
 
         return $query
@@ -52,7 +56,7 @@ class CalendarWidget extends FullCalendarWidget
 
     protected function resolveRecord(string|int $id): Model
     {
-        return Sidang::with(['perkara', 'hakim', 'hakimAnggota1', 'hakimAnggota2', 'hakimPanitera'])
+        return Sidang::with(['perkara', 'hakim', 'hakimAnggota1', 'hakimAnggota2', 'hakimPanitera', 'jaksa'])
             ->findOrFail($id);
     }
 
@@ -78,6 +82,9 @@ class CalendarWidget extends FullCalendarWidget
 
                 Section::make('Majelis Hakim')
                     ->schema([
+                        TextEntry::make('jaksa.nama')
+                            ->label('Jaksa Penuntut Umum')
+                            ->placeholder('N/A'),
                         TextEntry::make('hakim.nama')->label('Ketua Hakim'),
                         TextEntry::make('hakimAnggota1.nama')->label('Hakim Anggota 1'),
                         TextEntry::make('hakimAnggota2.nama')->label('Hakim Anggota 2'),
