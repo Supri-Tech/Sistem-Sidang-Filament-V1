@@ -41,7 +41,6 @@ class UserManagementResource extends Resource
                     ->preload()
                     ->searchable()
                     ->columnSpanFull()
-                    ->required(),
                 TextInput::make('name')->required(),
                 TextInput::make('email')->email()->required(),
                 TextInput::make('password')
