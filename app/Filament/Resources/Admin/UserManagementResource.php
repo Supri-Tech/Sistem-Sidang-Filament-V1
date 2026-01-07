@@ -4,8 +4,10 @@ namespace App\Filament\Resources\Admin;
 
 use App\Filament\Resources\Admin\UserManagementResource\Pages;
 use App\Filament\Resources\UserManagementResource\RelationManagers;
+use App\Models\Jaksa;
 use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -36,18 +38,43 @@ class UserManagementResource extends Resource
     {
         return $form
             ->schema([
+                Hidden::make('name_manually_edited')
+                    ->default(false)
+                    ->dehydrated(false),
                 Select::make('id_jaksa')
+                    ->label('Jaksa (opsional)')
                     ->relationship('jaksa', 'nama')
                     ->preload()
                     ->searchable()
+                    ->reactive()
+                    ->afterStateUpdated(function ($state, callable $set, callable $get) {
+                        if (!$state) {
+                            $set('name_manually_edited', false);
+                            $set('name', null);
+                            return;
+                        }
+
+                        if (!$get('name_manually_edited')) {
+                            $jaksa = Jaksa::find($state);
+
+                            if ($jaksa) {
+                                $set('name', $jaksa->nama);
+                            }
+                        }
+                    })
                     ->columnSpanFull(),
-                TextInput::make('name')->required(),
+                TextInput::make('name')
+                    ->required()
+                    ->reactive()
+                    ->afterStateUpdated(function (callable $set) {
+                        $set('name_manually_edited', true);
+                    }),
                 TextInput::make('email')->email()->required(),
                 TextInput::make('password')
                     ->password()
-                    ->dehydrateStateUsing(fn ($state) => !empty($state) ? bcrypt($state) : null)
-                    ->required(fn (string $context): bool => $context === 'create')
-                    ->dehydrated(fn ($state) => filled($state)),
+                    ->dehydrateStateUsing(fn($state) => !empty($state) ? bcrypt($state) : null)
+                    ->required(fn(string $context): bool => $context === 'create')
+                    ->dehydrated(fn($state) => filled($state)),
                 Select::make('roles')->relationship('roles', 'name')->preload()->searchable()
             ]);
     }
